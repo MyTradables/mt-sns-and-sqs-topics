@@ -1,0 +1,8 @@
+dist
+node_modules
+jest.config.ts
+**/__mocks__/
+
+*.spec.js
+*.config.js
+*-test.js

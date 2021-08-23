@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack validation should have a correct stack configuration 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters-[HASH REMOVED]": Object {
+      "Description": "Artifact hash for asset [HASH REMOVED]",
+      "Type": "String",
+    },
+    "AssetParameters-[HASH REMOVED]": Object {
+      "Description": "S3 bucket for asset [HASH REMOVED]",
+      "Type": "String",
+    },
+    "AssetParameters-[HASH REMOVED]": Object {
+      "Description": "S3 key for asset [HASH REMOVED]",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "boilerplateBE896E2B": Object {
+      "DependsOn": Array [
+        "boilerplateServiceRoleCC47D593",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters-[HASH REMOVED]",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters-[HASH REMOVED]",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters-[HASH REMOVED]",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "MemorySize": 128,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "boilerplateServiceRoleCC47D593",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 30,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "boilerplateServiceRoleCC47D593": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+}
+`;
