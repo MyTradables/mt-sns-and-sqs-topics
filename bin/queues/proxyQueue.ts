@@ -1,4 +1,4 @@
-import { IQueueMt } from "../stack-environment-types";
+import { IQueueMt } from '../stack-environment-types';
 
 export const proxyQueue: IQueueMt = {
   dlqName: 'proxyDlQueue',
@@ -7,4 +7,4 @@ export const proxyQueue: IQueueMt = {
   queueName: 'proxyQueue',
   queueTagKey: 'proxyTagkey',
   queueTagValue: 'proxyTagValue',
-}
+};

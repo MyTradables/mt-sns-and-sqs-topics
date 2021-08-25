@@ -8,10 +8,10 @@ const environmentConfig: IMtSnsAndSqsTopicsStackProps = {
     Application: 'MyTradables.com',
   },
   snsTopics: [
-    proxyTopic
+    proxyTopic,
   ],
   sqsQueue: [
-    proxyQueue
+    proxyQueue,
   ],
 };
 export default environmentConfig;
