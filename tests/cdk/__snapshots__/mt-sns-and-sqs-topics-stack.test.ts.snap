@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack validation should have a correct stack configuration 1`] = `
+Object {
+  "Resources": Object {
+    "mtkmskey5AA08EF4": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "Description": "MyTradables key used for encrypting",
+        "EnableKeyRotation": true,
+        "KeyPolicy": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "kms:Create*",
+                "kms:Describe*",
+                "kms:Enable*",
+                "kms:List*",
+                "kms:Put*",
+                "kms:Update*",
+                "kms:Revoke*",
+                "kms:Disable*",
+                "kms:Get*",
+                "kms:Delete*",
+                "kms:ScheduleKeyDeletion",
+                "kms:CancelKeyDeletion",
+                "kms:GenerateDataKey",
+                "kms:TagResource",
+                "kms:UntagResource",
+              ],
+              "Effect": "Allow",
+              "Principal": Object {
+                "AWS": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::KMS::Key",
+      "UpdateReplacePolicy": "Retain",
+    },
+    "mtkmskeyAlias84716001": Object {
+      "Properties": Object {
+        "AliasName": "alias/mt-kms-key",
+        "TargetKeyId": Object {
+          "Fn::GetAtt": Array [
+            "mtkmskey5AA08EF4",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::KMS::Alias",
+    },
+    "proxyDlQueueC6DB40B5": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "KmsMasterKeyId": Object {
+          "Fn::GetAtt": Array [
+            "mtkmskey5AA08EF4",
+            "Arn",
+          ],
+        },
+        "QueueName": "proxyDlQueue",
+        "Tags": Array [
+          Object {
+            "Key": "proxyTagkey",
+            "Value": "proxyTagValue",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "proxyQueueFC18A893": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "KmsMasterKeyId": Object {
+          "Fn::GetAtt": Array [
+            "mtkmskey5AA08EF4",
+            "Arn",
+          ],
+        },
+        "QueueName": "proxyQueue",
+        "RedrivePolicy": Object {
+          "deadLetterTargetArn": Object {
+            "Fn::GetAtt": Array [
+              "proxyDlQueueC6DB40B5",
+              "Arn",
+            ],
+          },
+          "maxReceiveCount": 3,
+        },
+        "Tags": Array [
+          Object {
+            "Key": "proxyTagkey",
+            "Value": "proxyTagValue",
+          },
+        ],
+      },
+      "Type": "AWS::SQS::Queue",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "proxyTopic0EBDEF0C": Object {
+      "Properties": Object {
+        "KmsMasterKeyId": Object {
+          "Fn::GetAtt": Array [
+            "mtkmskey5AA08EF4",
+            "Arn",
+          ],
+        },
+        "Tags": Array [
+          Object {
+            "Key": "proxyTagKey",
+            "Value": "proxyTagValue",
+          },
+        ],
+        "TopicName": "proxyTopic",
+      },
+      "Type": "AWS::SNS::Topic",
+    },
+  },
+}
+`;

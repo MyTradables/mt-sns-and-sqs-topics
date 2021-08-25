@@ -11,7 +11,7 @@
   "scripts": {
     "prepare": "npx husky install",
     "lint": "npx eslint **/*.ts --fix --quiet",
-    "build": "npx rimraf dist & webpack",
+    "build": "npx rimraf dist & tsc",
     "watch": "tsc -w",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -25,14 +25,14 @@
     "@types/aws-lambda": "^8.10.83",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.2",
-    "@typescript-eslint/parser": "^4.29.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
     "aws-cdk": "^1.119.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-airbnb-typescript": "^13.0.0",
-    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.4.0",
     "eslint-plugin-react": "^7.24.0",
     "fork-ts-checker-webpack-plugin": "^6.3.2",
@@ -47,7 +47,9 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.119.0",
+    "@aws-cdk/aws-kms": "^1.119.0",
+    "@aws-cdk/aws-sns": "^1.119.0",
+    "@aws-cdk/aws-sqs": "^1.119.0",
     "@aws-cdk/core": "1.119.0",
     "source-map-support": "^0.5.19"
   }
