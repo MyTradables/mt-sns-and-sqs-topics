@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
     - main
+  push:
+   branches:
+    - main
 
 jobs:
   build:
@@ -12,6 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Test
+        run: echo ${ github.run_id }
+        
       - name: Current User
         run: echo $GITHUB_ACTOR
 
